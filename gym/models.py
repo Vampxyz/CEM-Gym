@@ -16,12 +16,12 @@ class Modality(models.Model):
 
 class Class(models.Model):
     daysOfWeek = [
-        (1, 'Monday'),
-        (2, 'Tuesday'),
-        (3, 'Wednesday'),
-        (4, 'Thursday'),
-        (5, 'Friday'),
-        (6, 'Saturday'),
+        (1, 'Segunda-feira'),
+        (2, 'Terça-feira'),
+        (3, 'Quarta-feira'),
+        (4, 'Quinta-feira'),
+        (5, 'Sexta-feira'),
+        (6, 'Sábado'),
     ]
     
     modality = models.ForeignKey(
@@ -38,7 +38,7 @@ class Class(models.Model):
     hour = models.TimeField(verbose_name='Horário')
 
     instructor = models.CharField(max_length=100, verbose_name='Instrutor')
-    vacancy = models.PositiveIntegerField(default=15, verbose_name='Vagas')
+    vacancy = models.PositiveIntegerField(default=10, verbose_name='Vagas')
 
     class Meta:
         verbose_name = 'Turma'
@@ -46,7 +46,7 @@ class Class(models.Model):
         ordering = ['dayOfWeek', 'hour']
         
     def __str__(self):
-        dayName = self.getDayOfWeekDisplay()
+        dayName = self.get_dayOfWeek_display()
         formattedHour = self.hour.strftime('%H:%M')
         return f'{self.modality.name} - {dayName} {formattedHour}'
 
