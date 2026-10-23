@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEM Gym - Início</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="{% url 'home' %}" class="logo-btn">CEM</a>
+            </div>
+
+            <nav>
+                <a href="{% url 'home' %}" class="active">Início</a>
+                <a href="{% url 'classesList' %}">Grade de Horários</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Academia <br> <span>Corpo em Movimento</span></h1>
+            <p>Desafiando seus limites há 6 anos em Candeias</p>
+
+            <a href="{% url 'classesList' %}" class="btn-schedule">Ver Grade de Horários</a>
+        </div>
+    </section>
+
+    <section class="section-modalities">
+        <h2 class="section-title">O que Oferecemos</h2>
+
+        <div class="grid-modalities">
+            {% for modality in modalities %}
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{ modality.name }}</h3>
+                </div>
+
+                <div class="card-body">
+                    <p>{{ modality.description|default:"Confira esta modalidade direto na nossa recepção." }}</p>
+                </div>
+
+                <div class="card-footer">
+                    <span class="card-badge">Disponível</span>
+                </div>
+            </div>
+
+            {% empty %}
+
+            <p>Nenhuma modalidade disponível no momento.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Academia Corpo em Movimento</h3>
+                <p>Av. Presidente Kennedy, 2 - Candeias, PE</p>
+            </div>
+
+            <div class="footer-contact">
+                <p>Telefone: <span>(81) 98765-4321</span></p>
+                <p>&copy; 2026 Corpo em Movimento. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+/* Mantém a página inteira na altura da tela sem cortar o topo nem o rodapé */
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.schedule-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.schedule-header h1 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.schedule-header p {
+    color: #a0aec0;
+    margin-bottom: 24px;
+}
+
+/* Caixa da tabela com limite fixo de altura e scroll interno */
+.table-wrapper {
+    background-color: #12151c;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    max-height: 600px; /* <-- Limita a altura da tabela (mostra ~5 turmas e cria scroll para o resto) */
+    overflow-y: auto;  /* <-- Cria a barra de rolagem vertical DENTRO da tabela */
+    overflow-x: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Barra de rolagem estilizada dentro da tabela */
+.table-wrapper::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #12151c;
+    border-radius: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #252b37;
+    border-radius: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #adff2f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 700px;
+}
+
+th {
+    position: sticky; /* Deixa o cabeçalho (Modalidade, Dia, Horário...) fixo enquanto você rola os horários */
+    top: 0;
+    z-index: 10;
+    background-color: #1a1e26;
+    color: #a0aec0;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 18px 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Estilização das Colunas */
+.col-modality {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+}
+
+.day-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+}
+
+.time-badge {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffd700;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.instructor {
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.vagas-count {
+    color: #adff2f;
+    font-weight: bold;
+}
+
+/* Em celulares muito pequenos, libera o scroll normal da página */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        overflow: auto;
+    }
+    .table-wrapper {
+        max-height: 400px;
+    }
+}

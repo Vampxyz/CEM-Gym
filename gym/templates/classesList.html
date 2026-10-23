@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEM Gym - Turmas</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="{% url 'home' %}" class="logo-btn">CEM</a>
+            </div>
+            <nav>
+                <a href="{% url 'home' %}">Início</a>
+                <a href="{% url 'classesList' %}" class="active">Grade de Horários</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="schedule-container">
+        <div class="schedule-header">
+            <h1>Grade de Turmas</h1>
+            <p>Confira abaixo todos os nossos horários atualizados da semana</p>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modalidade</th>
+                        <th>Dia da Semana</th>
+                        <th>Horário</th>
+                        <th>Instrutor</th>
+                        <th>Vagas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in classes %}
+                    <tr>
+                        <td class="col-modality">{{ item.modality.name }}</td>
+                        <td><span class="day-badge">{{ item.get_dayOfWeek_display }}</span></td>
+                        <td><span class="time-badge">{{ item.hour|time:"H:i" }}</span></td>
+                        <td class="instructor">{{ item.instructor }}</td>
+                        <td><span class="vagas-count">{{ item.vacancy }}</span></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #a0aec0; padding: 40px;">
+                            Não há turmas cadastradas para esta semana.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Academia Corpo em Movimento</h3>
+                <p>Avenida Presidente Kennedy, 2 - Candeias, PE</p>
+            </div>
+            <div class="footer-contact">
+                <p>Telefone: <span>(81) 98765-4321</span></p>
+                <p>&copy; 2026 Corpo em Movimento. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+/* Efeito de Estrelas no Fundo (Background) */
+.hero {
+    position: relative;
+    padding: 120px 20px;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(31, 38, 48, 0.2) 0%, rgba(12, 14, 18, 1) 70%),
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 100px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 150px 70px, rgba(255, 255, 255, 0.5), rgba(0,0,0,0));
+    background-size: cover, 100px 100px, 150px 150px, 200px 200px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(173, 255, 47, 0.08) 0%, rgba(0,0,0,0) 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.hero h1 span {
+    color: #adff2f;
+    display: block;
+    font-size: 4.2rem;
+    text-shadow: 0 0 30px rgba(173, 255, 47, 0.2);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #a0aec0;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.btn-schedule {
+    display: inline-block;
+    padding: 18px 36px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #0c0e12;
+    background-color: #adff2f;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(173, 255, 47, 0.3);
+    transition: 0.3s;
+}
+
+.btn-schedule:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(173, 255, 47, 0.5);
+    background-color: #fff;
+}
+
+/* Seção Modalidades */
+/* Seção Modalidades */
+.section-modalities {
+    width: 100%; /* Garante que a seção ocupe toda a largura de 1200px dentro do flex body */
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #adff2f;
+}
+
+/* Cards Grid: 3 colunas por padrão no Desktop */
+.grid-modalities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card {
+    background-color: #12151c;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px; /* Altura reduzida e mais proporcional */
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Detalhe de Neon no Topo do Card */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #adff2f, #ffd700);
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(173, 255, 47, 0.4);
+    box-shadow: 0 10px 30px rgba(12, 14, 18, 0.5), 
+                0 0 20px rgba(173, 255, 47, 0.1);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-header h3 {
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.card-body p {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    margin-top: auto;
+}
+
+.card-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: rgba(173, 255, 47, 0.1);
+    color: #adff2f;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(173, 255, 47, 0.2);
+}
+/* Cards Grid */
+.grid-modalities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: #12151c;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 320px;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Detalhe de Neon no Topo do Card */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #adff2f, #ffd700);
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(173, 255, 47, 0.4);
+    box-shadow: 0 10px 30px rgba(12, 14, 18, 0.5), 
+                0 0 20px rgba(173, 255, 47, 0.1);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card-header h3 {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.card-body p {
+    color: #a0aec0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.card-footer {
+    margin-top: auto;
+}
+
+.card-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: rgba(173, 255, 47, 0.1);
+    color: #adff2f;
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(173, 255, 47, 0.2);
+}
+
+@media (max-width: 992px) {
+    .grid-modalities {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-modalities {
+        grid-template-columns: 1fr;
+    }
+    .hero h1 { font-size: 2.5rem; }
+    .hero h1 span { font-size: 2.8rem; }
+}
