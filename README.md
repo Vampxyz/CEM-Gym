@@ -8,7 +8,7 @@ Sistema web desenvolvido em **Django** e **SQLite** para a **Academia Corpo em M
 
 As respostas sobre o fluxo da aplicação, decisões de banco de dados (ORM), regras de negócio e conceitos aprendidos na segunda etapa estão disponíveis no arquivo abaixo:
 
-👉 **[Clique aqui para acessar as respostas da etapa de pós entrega (`answers.md`)](./answers.md)**
+👉 **[Clique aqui para acessar as respostas da etapa de pós entrega (`answers.md`)](https://github.com/Vampxyz/CEM-Gym/blob/main/ANSWERS.md)**
 
 ---
 
