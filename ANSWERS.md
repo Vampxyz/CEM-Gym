@@ -51,19 +51,60 @@ Porém além de retornar o html ele pega do banco de dados todas as turmas exist
 
 ## 5. O que acontece quando a proprietária tenta excluir a modalidade Musculação, que tem turmas? Onde, no código, está a decisão que produz esse comportamento, e por que vocês escolheram essa opção em vez de apagar as turmas junto?
 
-1. 
+1. Não dá pra excluir uma modalidade onde existe uma turma usando ela. Localizada na linha 33 do arquivo ***gym/models.py***: `on_delete=models.PROTECT,`; essa linha fica dentro da variável que serve como coluna de modalidade da tabela de turmas, essa linha **verifica se ao deletar** a modalidade há alguma turma usando ela, se a modalidade estiver em uso ele avisa algo como: **"Deletar a modalidade selecionada requer a exclusão dos seguintes objetos relacionados protegidos: "** e aí retorna o que foi criado na função `__str__` da tabela de turmas, ficaria algo como: **"Turma: Ginástica - Quarta-feira 16:00"**. Foi escolhido essa forma porque na regra de código **RN03: "Não deve ser possível excluir uma modalidade que ainda tenha turmas cadastradas."**
 
 ## 6. O dia da semana vem de uma lista fixa e não de um campo de texto livre. O que a lista fixa garante para a cliente? O que ela ganha, na prática, quando filtra as turmas no painel?
 
-1.
+1. Primeiro, por ser uma lista já definida os dias da semana, é uma preocupação a menos de ter que colocar inputs para o usuário digitar os dias da semana, qualquer erro de escrita já poderia ficar mais bagunçado o código, iria ficar mais longo o código por ter que ficar dando append no input que o usuário digitou e etc... colocar a possibilidade de filtrar pelos dias da semana também é mais fácil porque quando for registrar no painel essa tabela, já tem o "parâmetro" "list_filter" que a pessoa passa essa lista de dias da semana e pronto, bem mais rápido para desenvolver e essa função pra o cliente iria ter que ter de qualquer jeito por ser um requisito de funcionalidades.
 
 ## 7. Sem list_display , list_filter e search_fields , o painel continuaria funcionando. O que a cliente perderia? Relacione com a fala dela na reunião de levantamento.
 
-1.
+1. Continuaria funcionando mas não iria ter a funcionalidade de filtrar por modalidade e/ou dia da semana e o retorno visual da tabela poderia ficar pior por não ter o display.
 
 ## 8. Por que a página inicial mostra três modalidades e não quatro? Mostre a linha de código responsável e explique-a.
 
-1.
+1. Na verdade, na home page mostra todas as modalidades que estejam ativas:
+
+### Código da views.py:
+```py
+def index(request):
+    modalities = models.Modality.objects.filter(active=True)
+    classes = models.Class.objects.all()
+
+    context = {
+        "modalities": modalities,
+        "classes": classes,
+    }
+
+    return render(request, "index.html", context)
+```
+
+#### -> Na variável "modalities" armazena um "get" na tabela "Modality" só que passando um filtro onde "active" deve ser True, ou seja, o método .filter vai retornar apenas as modalidades onde o active é True.
+
+### Código html:
+```HTML
+{% for modality in modalities %}
+    <div class="card">
+        <div class="card-header">
+            <h3>{{ modality.name }}</h3>
+        </div>
+
+        <div class="card-body">
+            <p>{{ modality.description|default:"Confira esta modalidade direto na nossa recepção." }}</p>
+        </div>
+
+        <div class="card-footer">
+            <span class="card-badge">Disponível</span>
+        </div>
+    </div>
+
+    {% empty %}
+
+    <p>Nenhuma modalidade disponível no momento.</p>
+{% endfor %}
+```
+
+#### -> Aqui fica a renderização de como as informações estão estruturadas de fato.
 
 ---
 # | C. O processo
@@ -73,4 +114,4 @@ Porém além de retornar o html ele pega do banco de dados todas as turmas exist
 
 ## 10. Houve alguma decisão que o documento de requisitos não cobria? Qual foi e o que a equipe decidiu? (Se registraram no README, copie aqui.)
 
-1. 
+1. Nenhuma
